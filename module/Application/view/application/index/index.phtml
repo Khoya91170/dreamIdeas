@@ -2,15 +2,13 @@
 
 <table class="table">
     <tr>
-        <th>Id</th>
         <th>Name</th>
         <th>Description</th>
     </tr>
-    <?php foreach ($communities as $community) : ?>
+    <?php foreach ($this->community as $community) : ?>
         <tr>
-            <td><?php echo $this->escapeHtml($community->id);?></td>
-            <td><?php echo $this->escapeHtml($community->name);?></td>
-            <td><?php echo $this->escapeHtml($community->description);?></td>
+            <td><?php echo $community['name_Community'];?></td>
+            <td><?php echo $community['description_Community'];?></td>
         </tr>
     <?php endforeach; ?>
 </table>
