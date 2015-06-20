@@ -62,7 +62,7 @@ class Module
                         $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Group());
-                    return new TableGateway('group', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('community', $dbAdapter, null, $resultSetPrototype);
                 },
                 'Application\Model\MyAuthStorage' => function($sm){
                     return new \Application\Model\MyAuthStorage('zf_tutorial');
