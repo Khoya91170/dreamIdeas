@@ -32,7 +32,7 @@ class RegisterController extends AbstractActionController{
 
             // Insertion des données
             // Définition des parametres de la base de données
-            if (trim($login) == '' || trim($password) == '')
+            if (trim($login) == '' || trim($password) == '' || trim($type) == '')
             {
                 $this->redirect()->toRoute('register');
             }
