@@ -20,27 +20,25 @@ class RegisterController extends AbstractActionController{
     }
 
 
-    public function addUserAction(){
+    public function addUserAction()
+    {
         $request = $this->getRequest();
-        if($request->isPost()){
-
+        if ($request->isPost())
+        {
             //Récupère les données
             $login =  $this->getRequest()->getPost('login');
-            //$this->layout()->login = $this ->getRequest()->getPost('login');
-
             $password = $this->getRequest()->getPost('pass');
-            $password = sha1($password);
             $type = $this->getRequest()->getPost('type');
-
 
             // Insertion des données
             // Définition des parametres de la base de données
-            if($login =='' || $password ==''){
+            if (trim($login) == '' || trim($password) == '')
+            {
                 $this->redirect()->toRoute('register');
             }
-            else{
-                return new ViewModel((new Register())->addUser($login,$password));
-
+            else
+            {
+                return new ViewModel((new Register())->addUser($login, $password, $type));
             }
         }
         return;

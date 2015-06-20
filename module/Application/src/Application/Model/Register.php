@@ -12,19 +12,21 @@ use Zend\Db\Adapter\Adapter;
 
 class Register
 {
-    public function addUser($login, $password) //Il manque le type
+    public function addUser($login, $password, $type) //Il manque le type
     {
         $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
         $sql = new Sql($dbAdapter);
-
         $insert = $sql->insert('user'); // Définition de la table concernée
+
+        $type = strtolower($type);
         $newData = array(
-            'login'=> $login,
-            'password'=> $password
+            'login' => $login,
+            'password' => sha1($password),
+            'id_user_type' => $type == "admin" ? 1 : 2
         );
         $insert->values($newData);
-        $statement = $sql->prepareStatementForSqlObject($insert);
-        $result = $statement->execute();
+        $sql->prepareStatementForSqlObject($insert)
+            ->execute();
 
         return;
     }
