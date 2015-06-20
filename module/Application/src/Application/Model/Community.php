@@ -29,5 +29,23 @@ class Community
 
         return $returnArray;
     }
+
+    public function getCommunity($aCommunityId)
+    {
+        $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
+        $sql = new Sql($dbAdapter);
+        $select = $sql->select();
+        $select->from('community');
+        $select->where('community = '. $aCommunityId);
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+        $returnArray = array();
+        /* le resultat de la requete se trouve dans $returnArray */
+        foreach ($result as $row) {
+            $returnArray[] = $row;
+        }
+
+        return array('community' => $returnArray);
+    }
 }
 ?>

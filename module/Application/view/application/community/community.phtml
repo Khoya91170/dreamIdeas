@@ -1,0 +1,12 @@
+<?php
+    if(count($this->community) != 1)
+    {
+        $this->redirect()->toRoute('home');
+    }
+    else {
+        ?>
+        <h1>Communauté : <?php echo $this->community->name_Community; ?></h1>
+
+    <?php
+    }
+?>
