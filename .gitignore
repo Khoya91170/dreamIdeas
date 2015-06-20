@@ -9,3 +9,4 @@ nbproject
 composer.lock
 composer.phar
 vendor/bin
+module/Application/src/Application/Model/DbAdapterConfig.php
