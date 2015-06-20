@@ -16,4 +16,6 @@ class SuccessController extends AbstractActionController
 
         return new ViewModel();
     }
+
+
 }

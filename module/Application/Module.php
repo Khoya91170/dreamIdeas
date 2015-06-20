@@ -15,6 +15,15 @@ use Zend\Mvc\MvcEvent;
 use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 use Zend\Authentication\AuthenticationService;
 
+
+use Application\Model\Group;
+use Application\Model\GroupTable;
+use Application\Model\UserRegister;
+use Application\Model\UserRegisterTable;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+
+
 class Module
 {
     public function onBootstrap(MvcEvent $e)
@@ -44,6 +53,17 @@ class Module
     {
         return array(
             'factories'=>array(
+                'Application\Model\GroupTable' =>  function($sm) {
+                    $tableGateway = $sm->get('GroupTableGateway');
+                    $table = new GroupTable($tableGateway);
+                    return $table;
+                },
+                'GroupTableGateway' => function ($sm) {
+                        $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Group());
+                    return new TableGateway('group', $dbAdapter, null, $resultSetPrototype);
+                },
                 'Application\Model\MyAuthStorage' => function($sm){
                     return new \Application\Model\MyAuthStorage('zf_tutorial');
                 },

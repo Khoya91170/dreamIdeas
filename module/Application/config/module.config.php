@@ -37,10 +37,6 @@ return array(
                         'type'    => 'Segment',
                         'options' => array(
                             'route'    => '/[:action]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
                             'defaults' => array(
                             ),
                         ),
@@ -55,6 +51,33 @@ return array(
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Success',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:action]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+
+            'register' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/register',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Register',
                         'action'        => 'index',
                     ),
                 ),
@@ -99,7 +122,8 @@ return array(
         'invokables' => array(
             'Application\Controller\Index'   => 'Application\Controller\IndexController',
             'Application\Controller\Auth'    => 'Application\Controller\AuthController',
-            'Application\Controller\Success' => 'Application\Controller\SuccessController'
+            'Application\Controller\Success' => 'Application\Controller\SuccessController',
+            'Application\Controller\Register' => 'Application\Controller\RegisterController'
         ),
     ),
     'view_manager' => array(

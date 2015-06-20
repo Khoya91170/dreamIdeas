@@ -32,6 +32,8 @@ class User
      */
     public $rememberme;
 
+
+
     /**
      * @Annotation\Type("Zend\Form\Element\Submit")
      * @Annotation\Attributes({"value":"Submit"})

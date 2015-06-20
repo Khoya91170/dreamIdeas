@@ -9,16 +9,20 @@ $form->setAttribute('action', $this->url(
 ));
 $form->prepare();
 
+
 echo $this->form()->openTag($form);
 echo $this->formCollection($form);
 echo $this->form()->closeTag();
-
+echo '<a href ="./register"> Register now </a>';
 if ($this->messages){
     echo '<ul>';
     foreach($this->messages as $message)
     {
         echo '<li>'.$message.'</li>';
 
+
     }
+
     echo '</ul>';
+
 }

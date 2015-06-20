@@ -14,8 +14,23 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+    protected $groupTable;
+
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel(array(
+            'groups' => $this->getGroupTable()->fetchAll(),
+        ));
     }
+
+    public function getGroupTable()
+    {
+        if (!$this->groupTable) {
+            $sm = $this->getServiceLocator();
+            $this->groupTable = $sm->get('Application\Model\GroupTable');
+        }
+        return $this->groupTable;
+    }
+
+
 }
