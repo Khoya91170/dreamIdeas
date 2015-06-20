@@ -19,10 +19,11 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         $dbAdapterConfig = array(
-            'driver'   => 'Pdo_mysql',
+            'driver' => 'Pdo_mysql',
             'database' => 'dreamideas',
             'username' => 'root',
-            'password' => ''
+            'password' => 'root',
+            'charset' => 'utf8'
         );
         $dbAdapter = new Adapter($dbAdapterConfig);
         $sql = new Sql($dbAdapter);
@@ -40,6 +41,4 @@ class IndexController extends AbstractActionController
 
         return new ViewModel(array('community' => $returnArray));
     }
-
-
 }
