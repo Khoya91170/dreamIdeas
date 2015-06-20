@@ -4,8 +4,7 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\Annotation\AnnotationBuilder;
-use Zend\View\Model\ViewModel;
-
+use Zend\Session\Container;
 use Application\Model\User;
 
 class AuthController extends AbstractActionController
@@ -85,6 +84,8 @@ class AuthController extends AbstractActionController
 
                 if ($result->isValid()) {
                     $redirect = 'home';
+                    $userContainer = new Container('user');
+                    $userContainer->logged = true;
                     //check if it has rememberMe :
                     if ($request->getPost('rememberme') == 1 ) {
                         $this->getSessionStorage()
@@ -104,7 +105,7 @@ class AuthController extends AbstractActionController
     {
         $this->getSessionStorage()->forgetMe();
         $this->getAuthService()->clearIdentity();
-
+        (new Container('user'))->getManager()->destroy();
         $this->flashmessenger()->addMessage("You've been logged out");
         return $this->redirect()->toRoute('login');
     }

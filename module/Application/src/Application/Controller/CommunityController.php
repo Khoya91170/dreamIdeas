@@ -32,7 +32,8 @@
                 // Définition des parametres de la base de données
                 if (trim($nameCommunity) != '' && trim($descriptionCommunity) != '')
                 {
-                    return new ViewModel((new Community())->addCommunity($nameCommunity, $descriptionCommunity));
+                    (new Community())->addCommunity($nameCommunity, $descriptionCommunity);
+                    return $this->redirect()->toRoute('home');
                 }
             }
             return;

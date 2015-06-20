@@ -23,6 +23,13 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+     /*   $serviceManager = $e->getApplication()->getServiceManager();
+        $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
+
+        $myService = $serviceManager->get('MyModule\Service\MyService');
+
+        $viewModel->someVar = $myService->getSomeValue();*/
     }
 
     public function getConfig()
