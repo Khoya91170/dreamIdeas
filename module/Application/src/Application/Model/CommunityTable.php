@@ -9,7 +9,7 @@ namespace Application\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 
-class GroupTable
+class CommunityTable
 {
     protected $tableGateway;
 

@@ -16,8 +16,8 @@ use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 use Zend\Authentication\AuthenticationService;
 
 
-use Application\Model\Group;
-use Application\Model\GroupTable;
+use Application\Model\Community;
+use Application\Model\CommunityTable;
 use Application\Model\UserRegister;
 use Application\Model\UserRegisterTable;
 use Zend\Db\ResultSet\ResultSet;
@@ -53,15 +53,15 @@ class Module
     {
         return array(
             'factories'=>array(
-                'Application\Model\GroupTable' =>  function($sm) {
-                    $tableGateway = $sm->get('GroupTableGateway');
-                    $table = new GroupTable($tableGateway);
+                'Application\Model\CommunityTable' =>  function($sm) {
+                    $tableGateway = $sm->get('CommunityTableGateway');
+                    $table = new CommunityTable($tableGateway);
                     return $table;
                 },
-                'GroupTableGateway' => function ($sm) {
+                'CommunityTableGateway' => function ($sm) {
                         $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Group());
+                    $resultSetPrototype->setArrayObjectPrototype(new Community());
                     return new TableGateway('community', $dbAdapter, null, $resultSetPrototype);
                 },
                 'Application\Model\MyAuthStorage' => function($sm){

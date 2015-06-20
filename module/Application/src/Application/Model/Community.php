@@ -8,7 +8,7 @@
 
 namespace Application\Model;
 
-class Group
+class Community
 {
     public $id;
     public $name;

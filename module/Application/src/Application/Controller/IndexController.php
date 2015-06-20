@@ -14,22 +14,22 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
-    protected $groupTable;
+    protected $communityTable;
 
     public function indexAction()
     {
         return new ViewModel(array(
-            'groups' => $this->getGroupTable()->fetchAll(),
+            'communities' => $this->getCommunityTable()->fetchAll(),
         ));
     }
 
-    public function getGroupTable()
+    public function getCommunityTable()
     {
-        if (!$this->groupTable) {
+        if (!$this->communityTable) {
             $sm = $this->getServiceLocator();
-            $this->groupTable = $sm->get('Application\Model\GroupTable');
+            $this->communityTable = $sm->get('Application\Model\CommunityTable');
         }
-        return $this->groupTable;
+        return $this->communityTable;
     }
 
 
