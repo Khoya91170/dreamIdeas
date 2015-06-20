@@ -5,7 +5,7 @@
         <th>Name</th>
         <th>Description</th>
     </tr>
-    <?php foreach ($this->community as $community) : ?>
+    <?php foreach ($this->communities as $community) : ?>
         <tr>
             <td><?php echo $community['name_Community'];?></td>
             <td><?php echo $community['description_Community'];?></td>
@@ -15,3 +15,18 @@
 <br>
 
 <h1>Ideas</h1>
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Text</th>
+        <th>Author</th>
+    </tr>
+    <?php foreach ($this->ideas as $idea) : ?>
+        <tr>
+            <td><?php echo $idea['title_idea'];?></td>
+            <td><?php echo $idea['text_idea'];?></td>
+            <td><?php echo $idea['login'];?></td>
+        </tr>
+    <?php endforeach; ?>
+
+</table>

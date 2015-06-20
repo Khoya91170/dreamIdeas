@@ -14,15 +14,7 @@ class Register
 {
     public function addUser($login, $password) //Il manque le type
     {
-
-        $dbAdapterConfig = array(
-            'driver' => 'Pdo_mysql',
-            'database' => 'dreamideas',
-            'username' => 'root',
-            'password' => 'root',
-            'charset' => 'utf8'
-        );
-        $dbAdapter = new Adapter($dbAdapterConfig);
+        $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
         $sql = new Sql($dbAdapter);
 
         $insert = $sql->insert('user'); // Définition de la table concernée

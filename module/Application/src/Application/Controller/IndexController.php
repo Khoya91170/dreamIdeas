@@ -10,6 +10,7 @@
 namespace Application\Controller;
 
 use Application\Model\Community;
+use Application\Model\Idea;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -17,6 +18,9 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel((new Community())->getAllCommunities());
+        $results = array();
+        $results['communities'] = (new Community())->getAllCommunities();
+        $results['ideas'] = (new Idea())->getAllIdeas();
+        return new ViewModel($results);
     }
 }
