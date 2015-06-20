@@ -28,7 +28,6 @@ class Community
         $select->from('community');
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
-        //var_dump( $result);
         $returnArray = array();
         /* le resultat de la requete se trouve dans $returnArray */
         foreach ($result as $row) {

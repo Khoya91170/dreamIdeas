@@ -8,11 +8,10 @@
 
 namespace Application\Controller;
 
-use Zend\Db\Sql\Sql;
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Sql\Select;
+use Application\Model\Register;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+
 class RegisterController extends AbstractActionController{
 
     public function indexAction()
@@ -31,7 +30,8 @@ class RegisterController extends AbstractActionController{
 
             $password = $this->getRequest()->getPost('pass');
             $password = sha1($password);
-           // $this->layout()->password = $this ->getRequest()->getPost('pass');
+            $type = $this->getRequest()->getPost('type');
+
 
             // Insertion des données
             // Définition des parametres de la base de données
@@ -39,36 +39,11 @@ class RegisterController extends AbstractActionController{
                 $this->redirect()->toRoute('register');
             }
             else{
-                $dbAdapterConfig = array(
-                    'driver'   => 'Pdo_mysql',
-                    'database' => 'zend_test',
-                    'username' => 'root',
-                    'password' => 'root'
-                );
-                $dbAdapter = new Adapter($dbAdapterConfig);
-                $sql = new Sql($dbAdapter);
+                return new ViewModel((new Register())->addUser($login,$password));
 
-                $insert = $sql->insert('users'); // Définition de la table concernée
-                $newData = array(
-                    'username'=> $login,
-                    'password'=> $password
-                );
-                $insert->values($newData);
-                $statement = $sql->prepareStatementForSqlObject($insert);
-                $result = $statement->execute();
             }
-
-
-
-
-
-
         }
-
-
-
         return;
-
     }
 
 }
