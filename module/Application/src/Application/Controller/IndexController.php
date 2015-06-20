@@ -9,36 +9,14 @@
 
 namespace Application\Controller;
 
+use Application\Model\Community;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Db\Sql\Sql;
-use Zend\Db\Adapter\Adapter;
 
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $dbAdapterConfig = array(
-            'driver' => 'Pdo_mysql',
-            'database' => 'dreamideas',
-            'username' => 'root',
-            'password' => 'root',
-            'charset' => 'utf8'
-        );
-        $dbAdapter = new Adapter($dbAdapterConfig);
-        $sql = new Sql($dbAdapter);
-
-        $select = $sql->select();
-        $select->from('community');
-        $statement = $sql->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
-        //var_dump( $result);
-        $returnArray = array();
-        /* le resultat de la requete se trouve dans $returnArray */
-        foreach ($result as $row) {
-            $returnArray[] = $row;
-        }
-
-        return new ViewModel(array('community' => $returnArray));
+        return new ViewModel((new Community())->getAllCommunities());
     }
 }
