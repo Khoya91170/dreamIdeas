@@ -1,0 +1,16 @@
+<h1><?php echo $this->community[0]['name_Community']; ?></h1>
+<p><?php echo $this->community[0]['description_Community']; ?></p>
+<h2>Liste des commentaires :</h2>
+<?php
+if (count($this->comments) == 0)
+{
+    echo 'Aucun commentaire';
+}
+else
+{
+    foreach ($this->comments as $comment)
+    {
+        echo '<p>' . $comment['description_comment'] . ' - ' . $comment['login'] . '</p>';
+    }
+}
+?>

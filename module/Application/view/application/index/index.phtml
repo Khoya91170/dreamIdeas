@@ -7,7 +7,7 @@
     </tr>
     <?php foreach ($this->communities as $community) : ?>
         <tr>
-            <td><?php echo '<a href ="./community/id=' . $community['id_Community'] . '">' . $community['name_Community'] . '</a>';?></td>
+            <td><a href="<?php echo $this->url('community', array('action'=>'index', 'id' => $community['id_Community']));?>"><?php echo $community['name_Community']; ?></a></td>
             <td><?php echo $community['description_Community'];?></td>
         </tr>
     <?php endforeach; ?>

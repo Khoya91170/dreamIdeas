@@ -11,9 +11,13 @@ return array(
     'router' => array(
         'routes' => array(
             'community' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'segment',
                 'options' => array(
-                    'route'    => '/',
+                    'route'    => '/community[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
                     'defaults' => array(
                         'controller' => 'Application\Controller\Community',
                         'action'     => 'index',
@@ -134,7 +138,8 @@ return array(
             'Application\Controller\Index'   => 'Application\Controller\IndexController',
             'Application\Controller\Auth'    => 'Application\Controller\AuthController',
             'Application\Controller\Success' => 'Application\Controller\SuccessController',
-            'Application\Controller\Register' => 'Application\Controller\RegisterController'
+            'Application\Controller\Register' => 'Application\Controller\RegisterController',
+            'Application\Controller\Community' => 'Application\Controller\CommunityController'
         ),
     ),
     'view_manager' => array(

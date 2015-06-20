@@ -17,15 +17,7 @@
     {
         public function indexAction()
         {
-            $request = $this->getRequest();
-            if($request->isPost()){
-                //Récupère les données
-                //$communityId =  $this->getRequest()->getPost('communityId', null);
-                $communityId = $this->params()->fromQuery('id_Community', null);
-                if($communityId != null)
-                {
-                    return new ViewModel((new Community())->getCommunity($communityId));
-                }
-            }
+            $id = (int) $this->params()->fromRoute('id', 0);
+            return new ViewModel((new Community())->getCommunity($id));
         }
     }
