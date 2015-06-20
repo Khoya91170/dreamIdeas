@@ -63,5 +63,23 @@ class Community
         return array('community' => $returnCmy,
                      'comments' => $returnCmt);
     }
+
+    public function addCommunity($nameCommunity, $descriptionCommunity){
+
+        $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
+        $sql = new Sql($dbAdapter);
+        $insert = $sql->insert('community'); // Définition de la table concernée
+        $newData = array(
+            'name_Community' => $nameCommunity,
+            'description_Community' => $descriptionCommunity
+
+        );
+        $insert->values($newData);
+        $sql->prepareStatementForSqlObject($insert)
+            ->execute();
+
+        return;
+
+    }
 }
 ?>

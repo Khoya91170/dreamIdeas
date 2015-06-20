@@ -20,4 +20,25 @@
             $id = (int) $this->params()->fromRoute('id', 0);
             return new ViewModel((new Community())->getCommunity($id));
         }
+        public function addAction(){
+            $request = $this->getRequest();
+            if ($request->isPost())
+            {
+                //Récupère les données
+                $nameCommunity =  $this->getRequest()->getPost('name');
+                $descriptionCommunity = $this->getRequest()->getPost('desc');
+
+                // Insertion des données
+                // Définition des parametres de la base de données
+                if (trim($nameCommunity) == '' || trim($descriptionCommunity) == '')
+                {
+                    $this->redirect()->toRoute('community');
+                }
+                else
+                {
+                    return new ViewModel((new Community())->addCommunity($nameCommunity, $descriptionCommunity));
+                }
+            }
+            return;
+        }
     }

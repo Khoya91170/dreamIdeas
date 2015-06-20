@@ -12,7 +12,7 @@ use Zend\Db\Adapter\Adapter;
 
 class Register
 {
-    public function addUser($login, $password, $type) //Il manque le type
+    public function addUser($login, $password, $type)
     {
         $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
         $sql = new Sql($dbAdapter);
