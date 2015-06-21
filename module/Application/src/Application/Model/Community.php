@@ -71,18 +71,6 @@ class Community
         foreach($result as $row)
         {
             $returnIdeas[] = $row;
-            // Récupération des commentaires pour chaque idée
-           /* $select = $sql->select();
-            $select->from('comment')
-                ->where('id_idea = ' . $row['id_idea']);
-
-            $resultIdeasComments = $sql->prepareStatementForSqlObject($select)->execute();
-            $returnIdeasComments[$cpt][] = array();
-            foreach($resultIdeasComments as $commentRow)
-            {
-                $returnIdeasComments[$cpt] = $commentRow;
-            }
-            $cpt= $cpt +1;*/
 
         }
 

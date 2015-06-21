@@ -28,8 +28,7 @@
                 $nameCommunity =  $this->getRequest()->getPost('name');
                 $descriptionCommunity = $this->getRequest()->getPost('desc');
 
-                // Insertion des données
-                // Définition des parametres de la base de données
+
                 if (trim($nameCommunity) != '' && trim($descriptionCommunity) != '')
                 {
                     (new Community())->addCommunity($nameCommunity, $descriptionCommunity);

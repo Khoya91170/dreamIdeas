@@ -25,6 +25,21 @@ return array(
                 ),
             ),
 
+            'idea' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route'    => '/idea[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Idea',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+
             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -139,7 +154,8 @@ return array(
             'Application\Controller\Auth'    => 'Application\Controller\AuthController',
             'Application\Controller\Success' => 'Application\Controller\SuccessController',
             'Application\Controller\Register' => 'Application\Controller\RegisterController',
-            'Application\Controller\Community' => 'Application\Controller\CommunityController'
+            'Application\Controller\Community' => 'Application\Controller\CommunityController',
+            'Application\Controller\Idea' => 'Application\Controller\IdeaController'
         ),
     ),
     'view_manager' => array(

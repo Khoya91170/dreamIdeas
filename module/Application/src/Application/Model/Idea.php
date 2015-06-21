@@ -24,7 +24,6 @@ class Idea
                        'i.id_user = u.id_user');
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
-        //var_dump( $result);
         $returnArray = array();
         /* le resultat de la requete se trouve dans $returnArray */
         foreach ($result as $row) {
@@ -32,5 +31,38 @@ class Idea
         }
 
         return $returnArray;
+    }
+
+    public function getIdea($aIdeaId)
+    {
+        $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
+        $sql = new Sql($dbAdapter);
+        $select = $sql->select();
+        $select->from('idea')
+            ->where('id_idea = ' . $aIdeaId);
+
+        $result = $sql->prepareStatementForSqlObject($select)->execute();
+        $returnIdea = array();
+        foreach ($result as $row) {
+            $returnIdea[] = $row;
+        }
+
+        $select = $sql->select();
+        $select->from(array('c' => 'comment'),
+            array('description_comment'))
+            ->join(array('u' => 'user'),
+                'c.id_user = u.id_user',
+                array('login'))
+            ->where('id_Idea = ' . $aIdeaId);
+
+        $result = $sql->prepareStatementForSqlObject($select)->execute();
+        $returnCmt = array();
+        foreach ($result as $row)
+        {
+            $returnCmt[] = $row;
+        }
+
+        return array('ideas' => $returnIdea,
+            'comments' => $returnCmt);
     }
 }
