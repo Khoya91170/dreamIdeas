@@ -20,8 +20,10 @@ class Idea
         $select = $sql->select();
         $select->from(array('i' => 'idea'),
                       array('title_idea', 'text_idea'))
-                ->join(array('u' => 'user'),
-                       'i.id_user = u.id_user');
+               ->join(array('u' => 'user'),
+                      'i.id_user = u.id_user')
+               ->join(array('c' => 'community'),
+                      'c.id_Community = i.id_Community');
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
         $returnArray = array();
