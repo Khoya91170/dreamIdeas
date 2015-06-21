@@ -38,5 +38,11 @@ if ($this->logged)
     <?php endforeach; ?>
 
 </table>
-
+<?php
+if ($this->logged)
+{
+?>
 <a href="<?php echo $this->url('idea', array('action'=>'add'));?>"> Add Idea </a>
+<?php
+}
+?>

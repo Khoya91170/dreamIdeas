@@ -29,6 +29,11 @@
             return new ViewModel($results);
         }
         public function addAction(){
+            if (!SessionManager::sessionExists())
+            {
+                return $this->redirect()->toRoute('home');
+            }
+
             $request = $this->getRequest();
             if ($request->isPost())
             {

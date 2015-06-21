@@ -12,16 +12,22 @@ namespace Application\Controller;
 use Application\Model\Idea;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Model\SessionManager;
 
 class IdeaController extends AbstractActionController
 {
     public function indexAction()
     {
-        return;
+        return $this->redirect()->toRoute('home');
     }
 
-    public function addAction(){
+    public function addAction()
+    {
+        if (!SessionManager::sessionExists())
+        {
+            return $this->redirect()->toRoute('home');
+        }
 
-    return;
+        return;
     }
 }
