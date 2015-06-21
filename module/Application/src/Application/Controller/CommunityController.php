@@ -77,19 +77,17 @@
             if ($request->isPost())
             {
                 $ideaTitle=  strip_tags(htmlspecialchars($this->getRequest()->getPost('ideaTitle')));
-                $idea=  strip_tags(htmlspecialchars($this->getRequest()->getPost('idea')));
-                //var_dump($ideaTitle);
-                //var_dump($idea);
-                //die();
+                $ideaDesc =  strip_tags(htmlspecialchars($this->getRequest()->getPost('idea')));
+
                 $idUser = SessionManager::getIdUser();
                 $idCommunity = (int) $this->getRequest()->getPost('idCommunity');
 
-                if(empty($ideaTitle) || empty($idea) || empty($idCommunity))
+                if(empty($ideaTitle) || empty($ideaDesc) || empty($idCommunity))
                 {
                     $this->redirect()->toRoute('community');
                 }
                 $idea  = new Idea();
-                $idea->addIdea($ideaTitle, $idea, $idUser, $idCommunity);
+                $idea->addIdea($ideaTitle, $ideaDesc, $idUser, $idCommunity);
                 return $this->redirect()->toUrl("../community/" . $idCommunity);
             }
         }

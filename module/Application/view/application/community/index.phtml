@@ -69,7 +69,7 @@ if ($this->logged)
             {
             ?>
             <form action="<?php echo $this->url('community', array('action' => 'addIdeaComment'));?>" method="post">
-                <label for="comentIdea">ajouter un commentaire sur cette idée :</label>
+                <label for="comentIdea">Ajouter un commentaire sur cette idée :</label>
                 <textarea name="commentIdea" id="commentIdea"> </textarea>
                 <?php echo "<input type=\"hidden\" name=\"idIdea\" value=\"" . $idea['id_idea'] . "\"/>"; ?>
                 <?php echo "<input type=\"hidden\" name=\"idCommunity\" value=\"" . $this->results['community'][0]['id_Community'] . "\"/>"; ?>
@@ -87,8 +87,12 @@ if ($this->logged)
 if ($this->logged)
 {
     ?>
-    <form action="<?php echo 'community/addIdea';?>" method="post">
-        <label for="idea">Proposer une idée à la communauté :</label>
+    <form action="<?php echo $this->url('community', array('action' => 'addIdea'));?>" method="post">
+        <label for="comentIdea">Proposer une idée à la communauté :</label>
+        <label for="ideaTitle">Titre :</label>
+        <input type="text" name="ideaTitle"/>
+        <br/>
+        <label for="idea">Description :</label>
         <textarea name="idea" id="idea"> </textarea>
         <?php echo "<input type=\"hidden\" name=\"idCommunity\" value=\"" . $this->results['community'][0]['id_Community'] . "\"/>"; ?>
         <br>

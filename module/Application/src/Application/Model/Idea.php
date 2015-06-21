@@ -90,17 +90,16 @@ class Idea
     {
         $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
         $sql = new Sql($dbAdapter);
-        //$insert = $sql->insert('idea'); // Définition de la table concernée
+
+        $insert = $sql->insert('idea'); // Définition de la table concernée
         $newData = array(
             'title_idea' => $aTitleIdea,
             'text_idea' => $aDescriptionIdea,
             'id_user' => $aUserId,
             'id_community' => $aCommunityId
         );
-        var_dump($aTitleIdea);
-        var_dump($aDescriptionIdea);
-        die();
-        //die(var_dump($newData));
+
+
         $insert->values($newData);
         $sql->prepareStatementForSqlObject($insert)
             ->execute();
