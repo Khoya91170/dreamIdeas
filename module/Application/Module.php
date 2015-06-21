@@ -14,6 +14,7 @@ use Zend\Mvc\MvcEvent;
 
 use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 use Zend\Authentication\AuthenticationService;
+use Zend\Session\Container;
 
 
 class Module
@@ -24,12 +25,8 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
-     /*   $serviceManager = $e->getApplication()->getServiceManager();
-        $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
-
-        $myService = $serviceManager->get('MyModule\Service\MyService');
-
-        $viewModel->someVar = $myService->getSomeValue();*/
+        $userContainer = new Container('user');
+        $e->getViewModel()->setVariable('logged', $userContainer->offsetExists('logged'));
     }
 
     public function getConfig()

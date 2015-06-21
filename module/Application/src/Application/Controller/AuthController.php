@@ -48,7 +48,7 @@ class AuthController extends AbstractActionController
     {
         //if already login, redirect to success page
         if ($this->getAuthService()->hasIdentity()){
-            return $this->redirect()->toRoute('success');
+            return $this->redirect()->toRoute('home');
         }
 
         $form       = $this->getForm();
@@ -86,6 +86,8 @@ class AuthController extends AbstractActionController
                     $redirect = 'home';
                     $userContainer = new Container('user');
                     $userContainer->logged = true;
+                    $userContainer->login = $request->getPost('username');
+
                     //check if it has rememberMe :
                     if ($request->getPost('rememberme') == 1 ) {
                         $this->getSessionStorage()
@@ -107,6 +109,6 @@ class AuthController extends AbstractActionController
         $this->getAuthService()->clearIdentity();
         (new Container('user'))->getManager()->destroy();
         $this->flashmessenger()->addMessage("You've been logged out");
-        return $this->redirect()->toRoute('login');
+        return $this->redirect()->toRoute('home');
     }
 }

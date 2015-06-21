@@ -19,19 +19,10 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $userContainer = new Container('user');
-        if ($userContainer->offsetExists('logged'))
-        {
-            echo "LOGGED";
-        }
-        else
-        {
-            echo "NOT LOGGED";
-        }
-        $userContainer->locale = 'fr-FR';
         $results = array();
         $results['communities'] = (new Community())->getAllCommunities();
         $results['ideas'] = (new Idea())->getAllIdeas();
+        $results['logged'] = (new Container('user'))->offsetExists('logged');
         return new ViewModel($results);
     }
 }

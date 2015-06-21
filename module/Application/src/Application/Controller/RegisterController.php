@@ -11,11 +11,17 @@ namespace Application\Controller;
 use Application\Model\Register;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
+
 
 class RegisterController extends AbstractActionController{
 
     public function indexAction()
     {
+        if ((new Container('user'))->offsetExists('logged'))
+        {
+            return $this->redirect()->toRoute('home');
+        }
         return new ViewModel();
     }
 

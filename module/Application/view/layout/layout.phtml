@@ -30,14 +30,28 @@
                     </a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Accueil') ?></a></li>
-                            <li><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Se connecter') ?></a></li>
+                            <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                            <?php
+                            if (!$this->logged)
+                            {?>
+                                <li><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Login') ?></a></li>
+                                <li><a href="<?php echo $this->url('register') ?>"><?php echo $this->translate('Register') ?></a></li>
+                            <?php
+                            }
+                            else
+                            {
+                            ?>
+                                <li><a href='auth/logout'><?php echo $this->translate('Log out') ?></a></li>
+                            <?php
+                            }
+                            ?>
 
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
         </div>
+
         <div class="container">
             <?php echo $this->content; ?>
         </div> <!-- /container -->
