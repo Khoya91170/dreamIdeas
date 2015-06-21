@@ -38,4 +38,41 @@
             }
             return;
         }
+
+        public function addCommentAction()
+        {
+            $request = $this->getRequest();
+            if ($request->isPost())
+            {
+                $comment =  strip_tags(htmlspecialchars($this->getRequest()->getPost('comment')));
+                $idCommunity = (int) $this->getRequest()->getPost('idCommunity');
+                $idUser = 1;
+
+                if(empty($comment) || empty($idCommunity))
+                {
+                    $this->redirect()->toRoute('community');
+                }
+                $community  = new Community();
+                $community->addComment($idCommunity, $comment, $idUser);
+                return new ViewModel($community->getCommunity($idCommunity));
+            }
+        }
+
+        public function addIdeaAction($aCommunityId, $aIdea)
+        {
+            $request = $this->getRequest();
+            if ($request->isPost())
+            {
+
+            }
+        }
+
+        public function addIdeaCommentAction($aIdeaId, $aComment)
+        {
+            $request = $this->getRequest();
+            if ($request->isPost())
+            {
+
+            }
+        }
     }

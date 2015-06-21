@@ -60,8 +60,53 @@ class Community
             $returnCmt[] = $row;
         }
 
+        $select = $sql->select();
+        $select->from('idea')
+            ->where('id_Community = ' . $aCommunityId);
+
+        $result = $sql->prepareStatementForSqlObject($select)->execute();
+        $returnIdeas = array();
+        $returnIdeasComments = array();
+        $cpt = 0;
+        foreach($result as $row)
+        {
+            $returnIdeas[] = $row;
+            // Récupération des commentaires pour chaque idée
+           /* $select = $sql->select();
+            $select->from('comment')
+                ->where('id_idea = ' . $row['id_idea']);
+
+            $resultIdeasComments = $sql->prepareStatementForSqlObject($select)->execute();
+            $returnIdeasComments[$cpt][] = array();
+            foreach($resultIdeasComments as $commentRow)
+            {
+                $returnIdeasComments[$cpt] = $commentRow;
+            }
+            $cpt= $cpt +1;*/
+
+        }
+
         return array('community' => $returnCmy,
-                     'comments' => $returnCmt);
+                     'comments' => $returnCmt,
+                      'ideas' => $returnIdeas);
+    }
+
+    public function addComment($aCommunityId, $aComment, $aUserId)
+    {
+        $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
+        $sql = new Sql($dbAdapter);
+        $insert = $sql->insert('comment'); // Définition de la table concernée
+
+        $newData = array(
+            'description_comment' => $aComment,
+            'id_Community' => $aCommunityId,
+            'id_user' => $aUserId
+        );
+        $insert->values($newData);
+        $sql->prepareStatementForSqlObject($insert)
+            ->execute();
+
+        return;
     }
 
     public function addCommunity($nameCommunity, $descriptionCommunity){
