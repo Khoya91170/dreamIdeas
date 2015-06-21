@@ -14,7 +14,7 @@ class User
      * @Annotation\Type("Zend\Form\Element\Text")
      * @Annotation\Required({"required":"true" })
      * @Annotation\Filter({"name":"StripTags"})
-     * @Annotation\Options({"label":"Nom d'utilisateur:"})
+     * @Annotation\Options({"label":"Nom d'utilisateur :"})
      */
     public $username;
 
