@@ -10,6 +10,7 @@
     namespace Application\Controller;
 
     use Application\Model\Community;
+    use Application\Model\Idea;
     use Zend\Mvc\Controller\AbstractActionController;
     use Zend\View\Model\ViewModel;
     use Application\Model\SessionManager;
@@ -70,21 +71,46 @@
             }
         }
 
-        public function addIdeaAction($aCommunityId, $aIdea)
+        public function addIdeaAction()
         {
             $request = $this->getRequest();
             if ($request->isPost())
             {
+                $ideaTitle=  strip_tags(htmlspecialchars($this->getRequest()->getPost('ideaTitle')));
+                $idea=  strip_tags(htmlspecialchars($this->getRequest()->getPost('idea')));
+                //var_dump($ideaTitle);
+                //var_dump($idea);
+                //die();
+                $idUser = SessionManager::getIdUser();
+                $idCommunity = (int) $this->getRequest()->getPost('idCommunity');
 
+                if(empty($ideaTitle) || empty($idea) || empty($idCommunity))
+                {
+                    $this->redirect()->toRoute('community');
+                }
+                $idea  = new Idea();
+                $idea->addIdea($ideaTitle, $idea, $idUser, $idCommunity);
+                return $this->redirect()->toUrl("../community/" . $idCommunity);
             }
         }
 
-        public function addIdeaCommentAction($aIdeaId, $aComment)
+        public function addIdeaCommentAction()
         {
             $request = $this->getRequest();
             if ($request->isPost())
             {
+                $commentIdea=  strip_tags(htmlspecialchars($this->getRequest()->getPost('commentIdea')));
+                $idCommunity = (int) $this->getRequest()->getPost('idCommunity');
+                $idIdea = (int) $this->getRequest()->getPost('idIdea');
+                $idUser = (new SessionManager())->getIdUser();
 
+                if(empty($comment) || empty($idCommunity))
+                {
+                    $this->redirect()->toRoute('community');
+                }
+                $idea  = new Idea();
+                $idea->addComment($commentIdea, $idIdea, $idUser);
+                return $this->redirect()->toUrl("../community/" . $idCommunity);
             }
         }
     }

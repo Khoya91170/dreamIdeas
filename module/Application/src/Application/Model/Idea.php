@@ -67,4 +67,44 @@ class Idea
         return array('ideas' => $returnIdea,
             'comments' => $returnCmt);
     }
+
+    public function addComment($aDescription, $aIdeaId, $aUserId)
+    {
+        $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
+        $sql = new Sql($dbAdapter);
+        $insert = $sql->insert('comment'); // Définition de la table concernée
+
+        $newData = array(
+            'description_comment' => $aDescription,
+            'id_idea' => $aIdeaId,
+            'id_user' => $aUserId
+        );
+        $insert->values($newData);
+        $sql->prepareStatementForSqlObject($insert)
+            ->execute();
+
+        return;
+    }
+
+    public function addIdea($aTitleIdea, $aDescriptionIdea, $aUserId, $aCommunityId)
+    {
+        $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
+        $sql = new Sql($dbAdapter);
+        //$insert = $sql->insert('idea'); // Définition de la table concernée
+        $newData = array(
+            'title_idea' => $aTitleIdea,
+            'text_idea' => $aDescriptionIdea,
+            'id_user' => $aUserId,
+            'id_community' => $aCommunityId
+        );
+        var_dump($aTitleIdea);
+        var_dump($aDescriptionIdea);
+        die();
+        //die(var_dump($newData));
+        $insert->values($newData);
+        $sql->prepareStatementForSqlObject($insert)
+            ->execute();
+
+        return;
+    }
 }

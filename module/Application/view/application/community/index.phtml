@@ -61,17 +61,18 @@ if ($this->logged)
             $result = $sql->prepareStatementForSqlObject($select)->execute();
             foreach ($result as $row)
             {
-                echo "- " . $row['description_comment'];
+                echo "<br/>- " . $row['description_comment'];
             }
             ?>
             <?php
             if ($this->logged)
             {
             ?>
-            <form action="<?php echo 'community/addIdeaComment';?>" method="post">
+            <form action="<?php echo $this->url('community', array('action' => 'addIdeaComment'));?>" method="post">
                 <label for="comentIdea">ajouter un commentaire sur cette idée :</label>
                 <textarea name="commentIdea" id="commentIdea"> </textarea>
                 <?php echo "<input type=\"hidden\" name=\"idIdea\" value=\"" . $idea['id_idea'] . "\"/>"; ?>
+                <?php echo "<input type=\"hidden\" name=\"idCommunity\" value=\"" . $this->results['community'][0]['id_Community'] . "\"/>"; ?>
                 <br/>
                 <input type="submit" value="Valider"/>
             </form>
