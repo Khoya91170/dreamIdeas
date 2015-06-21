@@ -54,7 +54,7 @@
                 }
                 $community  = new Community();
                 $community->addComment($idCommunity, $comment, $idUser);
-                return new ViewModel($community->getCommunity($idCommunity));
+                return $this->redirect()->toUrl("../community/" . $idCommunity);
             }
         }
 
