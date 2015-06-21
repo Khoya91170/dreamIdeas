@@ -3,36 +3,44 @@
     use Zend\Db\Sql\Sql;
     use Zend\Db\Adapter\Adapter;
 ?>
-<h1><?php echo $this->community[0]['name_Community']; ?></h1>
-<p><?php echo $this->community[0]['description_Community']; ?></p>
+<h1><?php echo $this->results['community'][0]['name_Community']; ?></h1>
+<p><?php echo $this->results['community'][0]['description_Community']; ?></p>
 <h2>Liste des commentaires :</h2>
 <?php
-if (count($this->comments) == 0)
+if (count($this->results['comments']) == 0)
 {
     echo 'Aucun commentaire';
 }
 else
 {
-    foreach ($this->comments as $comment)
+    foreach ($this->results['comments'] as $comment)
     {
         echo '<p>' . $comment['description_comment'] . ' [ <span style="font-weight:bold;">' . $comment['login'] . '</span> ]</p>';
     }
 }
 ?>
-
+<?php
+if ($this->logged)
+{
+?>
     <form action="<?php echo $this->url('community', array('action' => 'addComment'))?>" method="post">
         <label for="comment">Ajouter un commentaire sur la communauté :</label>
         <textarea name="comment" id="comment"> </textarea>
-        <?php echo "<input type=\"hidden\" name=\"idCommunity\" value=\"" . $this->community[0]['id_Community'] . "\"/>"; ?>
+        <?php echo "<input type=\"hidden\" name=\"idCommunity\" value=\"" . $this->results['community'][0]['id_Community'] . "\"/>"; ?>
         <br/>
         <input type="submit" value="Valider"/>
 
     </form>
 
-<hr/>
+    <hr/>
+<?php
+}
+?>
+
+
 <?php
     echo "<h2>Liste des idées</h2>";
-    if (count($this->ideas) == 0)
+    if (count($this->results['ideas']) == 0)
     {
         echo 'Aucune idée';
     }
@@ -41,7 +49,7 @@ else
         $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
         $sql = new Sql($dbAdapter);
 
-        foreach ($this->ideas as $idea)
+        foreach ($this->results['ideas'] as $idea)
         {
             echo '<p>' . $idea['title_idea'] . ' : ' . $idea['text_idea'] . '</p>';
 
@@ -56,7 +64,10 @@ else
                 echo "- " . $row['description_comment'];
             }
             ?>
-
+            <?php
+            if ($this->logged)
+            {
+            ?>
             <form action="<?php echo 'community/addIdeaComment';?>" method="post">
                 <label for="comentIdea">ajouter un commentaire sur cette idée :</label>
                 <textarea name="commentIdea" id="commentIdea"> </textarea>
@@ -64,18 +75,27 @@ else
                 <br/>
                 <input type="submit" value="Valider"/>
             </form>
+            <?php
+            }
+            ?>
 <?php
         }
 ?>
+
+        <?php
+        if ($this->logged)
+        {
+        ?>
         <form action="<?php echo 'community/addIdea';?>" method="post">
-<label for="idea">proposer une idée à la communauté :</label>
-<textarea name="idea" id="idea"> </textarea>
-                    <?php echo "<input type=\"hidden\" name=\"idCommunity\" value=\"" . $this->community[0]['id_Community'] . "\"/>"; ?>
-
-<br/>
+            <label for="idea">Proposer une idée à la communauté :</label>
+            <textarea name="idea" id="idea"> </textarea>
+            <?php echo "<input type=\"hidden\" name=\"idCommunity\" value=\"" . $this->results['community'][0]['id_Community'] . "\"/>"; ?>
+            <br>
             <input type="submit" value="Valider"/>
-
         </form>
+        <?php
+        }
+        ?>
 <?php
     }
 ?>

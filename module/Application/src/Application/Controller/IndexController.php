@@ -11,7 +11,7 @@ namespace Application\Controller;
 
 use Application\Model\Community;
 use Application\Model\Idea;
-use Zend\Session\Container;
+use Application\Model\SessionManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -22,7 +22,7 @@ class IndexController extends AbstractActionController
         $results = array();
         $results['communities'] = (new Community())->getAllCommunities();
         $results['ideas'] = (new Idea())->getAllIdeas();
-        $results['logged'] = (new Container('user'))->offsetExists('logged');
+        $results['logged'] = SessionManager::sessionExists();
         return new ViewModel($results);
     }
 }

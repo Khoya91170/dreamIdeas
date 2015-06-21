@@ -5,7 +5,11 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\Annotation\AnnotationBuilder;
 use Zend\Session\Container;
+use Zend\Db\Adapter\Adapter;
 use Application\Model\User;
+use Application\Model\SessionManager;
+use Application\Model\DbAdapterConfig;
+use Zend\Db\Sql\Sql;
 
 class AuthController extends AbstractActionController
 {
@@ -73,7 +77,6 @@ class AuthController extends AbstractActionController
                 $this->getAuthService()->getAdapter()
                                        ->setIdentity($request->getPost('username'))
                                        ->setCredential(sha1($request->getPost('password')));
-                var_dump($this->getAuthService());
 
                 $result = $this->getAuthService()->authenticate();
                 foreach($result->getMessages() as $message)
@@ -82,11 +85,27 @@ class AuthController extends AbstractActionController
                     $this->flashmessenger()->addMessage($message);
                 }
 
+
                 if ($result->isValid()) {
                     $redirect = 'home';
-                    $userContainer = new Container('user');
-                    $userContainer->logged = true;
-                    $userContainer->login = $request->getPost('username');
+
+                    $dbAdapter = new Adapter(DbAdapterConfig::getDbAdapter());
+                    $sql = new Sql($dbAdapter);
+
+                    $select = $sql->select();
+                    $select->from('user',
+                                  'id_user')
+                            ->where("login = '" .  $request->getPost('username') . "'");
+                    $statement = $sql->prepareStatementForSqlObject($select);
+                    $result = $statement->execute();
+
+                    $returnArray = array();
+                    foreach ($result as $row) {
+                        $returnArray[] = $row;
+                    }
+
+                    SessionManager::setLogin($request->getPost('username'));
+                    SessionManager::setIdUser($returnArray[0]['id_user']);
 
                     //check if it has rememberMe :
                     if ($request->getPost('rememberme') == 1 ) {
@@ -107,7 +126,7 @@ class AuthController extends AbstractActionController
     {
         $this->getSessionStorage()->forgetMe();
         $this->getAuthService()->clearIdentity();
-        (new Container('user'))->getManager()->destroy();
+        SessionManager::destroy();
         $this->flashmessenger()->addMessage("You've been logged out");
         return $this->redirect()->toRoute('home');
     }

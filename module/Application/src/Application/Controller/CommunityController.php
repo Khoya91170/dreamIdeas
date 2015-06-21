@@ -12,13 +12,21 @@
     use Application\Model\Community;
     use Zend\Mvc\Controller\AbstractActionController;
     use Zend\View\Model\ViewModel;
+    use Application\Model\SessionManager;
 
     class CommunityController extends AbstractActionController
     {
         public function indexAction()
         {
             $id = (int) $this->params()->fromRoute('id', 0);
-            return new ViewModel((new Community())->getCommunity($id));
+
+            $results = array(
+                'logged' => SessionManager::sessionExists(),
+                'results' => (new Community())->getCommunity($id));
+            //$results['logged'] = SessionManager::sessionExists();
+           // var_dump($results[0]);
+           // die();
+            return new ViewModel($results);
         }
         public function addAction(){
             $request = $this->getRequest();
@@ -45,7 +53,7 @@
             {
                 $comment =  strip_tags(htmlspecialchars($this->getRequest()->getPost('comment')));
                 $idCommunity = (int) $this->getRequest()->getPost('idCommunity');
-                $idUser = 1;
+                $idUser = SessionManager::getIdUser();
 
                 if(empty($comment) || empty($idCommunity))
                 {

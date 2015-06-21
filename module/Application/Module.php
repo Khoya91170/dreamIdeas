@@ -14,7 +14,7 @@ use Zend\Mvc\MvcEvent;
 
 use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 use Zend\Authentication\AuthenticationService;
-use Zend\Session\Container;
+use Application\Model\SessionManager;
 
 
 class Module
@@ -25,8 +25,7 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
-        $userContainer = new Container('user');
-        $e->getViewModel()->setVariable('logged', $userContainer->offsetExists('logged'));
+        $e->getViewModel()->setVariable('logged', SessionManager::sessionExists());
     }
 
     public function getConfig()
