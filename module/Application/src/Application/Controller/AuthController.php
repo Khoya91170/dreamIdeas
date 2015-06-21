@@ -4,7 +4,6 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\Annotation\AnnotationBuilder;
-use Zend\Session\Container;
 use Zend\Db\Adapter\Adapter;
 use Application\Model\User;
 use Application\Model\SessionManager;
