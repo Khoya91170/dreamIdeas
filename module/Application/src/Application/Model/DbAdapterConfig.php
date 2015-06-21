@@ -20,7 +20,7 @@ class DbAdapterConfig
                 'driver' => 'Pdo_mysql',
                 'database' => 'dreamideas',
                 'username' => 'root',
-                'password' => 'root',
+                'password' => '',
                 'charset' => 'utf8'
             );
         }

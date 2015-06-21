@@ -81,21 +81,18 @@ if ($this->logged)
 <?php
         }
 ?>
-
-        <?php
-        if ($this->logged)
-        {
-        ?>
-        <form action="<?php echo 'community/addIdea';?>" method="post">
-            <label for="idea">Proposer une idée à la communauté :</label>
-            <textarea name="idea" id="idea"> </textarea>
-            <?php echo "<input type=\"hidden\" name=\"idCommunity\" value=\"" . $this->results['community'][0]['id_Community'] . "\"/>"; ?>
-            <br>
-            <input type="submit" value="Valider"/>
-        </form>
-        <?php
-        }
-        ?>
 <?php
-    }
+}
+if ($this->logged)
+{
+    ?>
+    <form action="<?php echo 'community/addIdea';?>" method="post">
+        <label for="idea">Proposer une idée à la communauté :</label>
+        <textarea name="idea" id="idea"> </textarea>
+        <?php echo "<input type=\"hidden\" name=\"idCommunity\" value=\"" . $this->results['community'][0]['id_Community'] . "\"/>"; ?>
+        <br>
+        <input type="submit" value="Valider"/>
+    </form>
+<?php
+}
 ?>
