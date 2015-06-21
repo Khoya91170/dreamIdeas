@@ -1,25 +1,20 @@
-<h1>Add a new Idea</h1>
+<h1>Ajouter une nouvelle idée</h1>
 <form action="<?php echo $this->url('idea', array('action' => 'add'));?>" method="post">
 
     <table>
-
         <tr>
-
-            <td><label for="name">Name :</label></td>
+            <td><label for="name">Nom :</label></td>
             <td><input type="text" name="name" id="name"/></td>
-
         </tr>
 
         <tr>
-
             <td><label for="desc">Description :</label></td>
             <td> <textarea rows="4" cols="100" name="desc" id="desc""></textarea> </td>
-
         </tr>
         <!-- manque le choix de la communauté à laquelle elle appartient !-->
 
     </table>
 
-    <input type="submit" name="add_Idea" value="Add idea"/>
+    <input type="submit" name="add_Idea" value="Ajouter idée"/>
 
 </form>

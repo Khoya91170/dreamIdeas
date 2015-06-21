@@ -127,7 +127,7 @@ class AuthController extends AbstractActionController
         $this->getSessionStorage()->forgetMe();
         $this->getAuthService()->clearIdentity();
         SessionManager::destroy();
-        $this->flashmessenger()->addMessage("You've been logged out");
+        $this->flashmessenger()->addMessage("Vous avez été déconnecté.");
         return $this->redirect()->toRoute('home');
     }
 }

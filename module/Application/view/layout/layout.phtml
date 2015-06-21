@@ -30,18 +30,18 @@
                     </a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                            <li><a href="<?php echo $this->url('home') ?>">Accueil</a></li>
                             <?php
                             if (!$this->logged)
                             {?>
-                                <li><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Login') ?></a></li>
-                                <li><a href="<?php echo $this->url('register') ?>"><?php echo $this->translate('Register') ?></a></li>
+                                <li><a href="<?php echo $this->url('login') ?>">Connexion</a></li>
+                                <li><a href="<?php echo $this->url('register') ?>">Inscription</a></li>
                             <?php
                             }
                             else
                             {
                             ?>
-                                <li><a href='http://localhost/DreamIdeas/public/auth/logout'><?php echo $this->translate('Log out') ?></a></li>
+                                <li><a href='http://localhost/DreamIdeas/public/auth/logout'>Déconnexion</a></li>
                             <?php
                             }
                             ?>

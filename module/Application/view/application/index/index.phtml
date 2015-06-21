@@ -1,7 +1,7 @@
-<h1>Communities</h1>
+<h1>Communautés</h1>
 <table class="table">
     <tr>
-        <th>Name</th>
+        <th>Nom</th>
         <th>Description</th>
     </tr>
     <?php foreach ($this->communities as $community) : ?>
@@ -15,19 +15,19 @@
 if ($this->logged)
 {
 ?>
-    <a href="<?php echo $this->url('community', array('action' => 'add'));?>"> Add Community </a>
+    <a href="<?php echo $this->url('community', array('action' => 'add'));?>">Ajouter communauté</a>
 <?php
 }
 ?>
 
 <br>
 
-<h1>Ideas</h1>
+<h1>Idées</h1>
 <table class="table">
     <tr>
-        <th>Title</th>
-        <th>Text</th>
-        <th>Author</th>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Auteur</th>
     </tr>
     <?php foreach ($this->ideas as $idea) : ?>
         <tr>
@@ -42,7 +42,7 @@ if ($this->logged)
 if ($this->logged)
 {
 ?>
-<a href="<?php echo $this->url('idea', array('action'=>'add'));?>"> Add Idea </a>
+<a href="<?php echo $this->url('idea', array('action'=>'add'));?>">Ajouter idée</a>
 <?php
 }
 ?>
