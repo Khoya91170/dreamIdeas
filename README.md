@@ -5,7 +5,7 @@ This project is a practical work on the Zend framework I had to do during my BS 
 The principle of this project is to develop a community website where people can share ideas, vote for them or exclude them after a certain time.
 
 Ideas can be classified in groups according to the area concerned.
-There must be an authentication system (registration / Log) to share ideas and vote for them.
+There must be an authentication system (registration / log in) to share ideas and vote for them.
 It is important that ideas are associated with groups or communities.
 
 # Results
